@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HÃY CHỌN GIÁ ĐÚNG:</title>
+    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div id="title1">
+    <div id="h">
+        <img style="display: inline; width: 150px  " src="https://upload.wikimedia.org/wikipedia/vi/6/6c/Logo_of_Ai_la_trieu_phu_-_Ghe_nong.jpg" alt="logo" />
+        <h1 style="display: inline;">WHO IS THE MILLIONAIRE</h1>
+    </div>
+    <div id="result">
+        <p class="result" id="resultAsk1"></p>
+        <p class="result" id="resultAsk2"></p>
+    </div>
+</div>
+
+<div id="background">
+    <div id="top">
+        <div id="question"></div>
+        <div id="prize"></div>
+    </div>
+    <div id="ans">
+        <div id="ansLeft">
+            <button class="a1" id="ans1"  onclick="clickAnswer(this.id), playSound()">1</button>
+            <br>
+            <button class="a2" id="ans2" onclick="clickAnswer(this.id), playSound()">2</button>
+        </div>
+        <div id="ansRight">
+            <button class="a3" id="ans3" onclick="clickAnswer(this.id), playSound()">3</button>
+            <br>
+            <button class="a4" id="ans4" onclick="clickAnswer(this.id), playSound()">4</button>
+        </div>
+    </div>
+</div>
+<button style="width: 10%" class="btn btn-success" onclick="resetQuiz(), soundStart()">Start</button>
+<button style="width: 10%" class="btn btn-danger" onclick="resetQuiz(), soundStart()">Reset</button>
+<button style="width: 10%" class="btn btn-warning" id="fifty" onclick="chooseFiftyPerFifty()">50/50</button>
+<button style="width: 10%" class="btn btn-info" id="ask"  onclick="askG()">Ask Guest</button>
+<button style="width: 10%" class="btn btn-info" id="askM"  onclick="askMom()">Call to Your Mom</button>
+
+<audio id="soundBackGround">
+    <source autoplay="false" src="/mp3/AiLaTrieuPhu-VA_43vp2.mp3"></audio>
+<audio id="soundClick">
+    <source autoplay="false" src="mp3/Alley 119 Tho Quan 3.m4a">
+</audio>
+<audio id="askMom">
+    <source autoplay="false" src="mp3/Alley 119 Tho Quan 2.m4a">
+</audio>
+<audio id="end">
+    <source autoplay="false" src="mp3/Alley 119 Tho Quan 4.m4a">
+</audio>
+<audio id="win">
+    <source autoplay="false" src="mp3/Alley 119 Tho Quan 5.m4a">
+</audio>
+<script src="Quiz.js"></script>
+<script src="GameManager.js"></script>
+
+<script>
+
+    function displayQuiz(index) {
+        document.getElementById("question").innerHTML = "Câu hỏi " + (gameManager.count + 1) + ": " + gameManager.quiznew[index].question;
+        for (let i = 0; i < gameManager.quiznew[index].answer.length; i++) {
+            document.getElementById('ans' + (i + 1)).innerHTML = gameManager.quiznew[index].answer[i];
+            document.getElementById('resultAsk1').innerHTML = '';
+            document.getElementById('resultAsk2').innerHTML = '';
+
+        }
+    }
+
+
+
+    function clickAnswer(id) {
+        let answer = document.getElementById(id).innerText;
+        gameManager.chooseAnswer(answer);
+        gameManager.newQuiz(gameManager.getCurrent());
+        gameManager.nextQuiz();
+    }
+
+    function chooseFiftyPerFifty(index) {
+        index = gameManager.getCurrent();
+        gameManager.chooseFifty(index);
+        document.getElementById("fifty").disabled = true;
+    }
+
+    function resetQuiz() {
+        gameManager.startGame();
+        displayQuiz(gameManager.current);
+    }
+
+    function askG(index) {
+        index = gameManager.getCurrent();
+        gameManager.askGuest(index)
+        document.getElementById("ask").disabled = true;
+    }
+//Sound
+    function playSound() {
+        let sound = document.getElementById("soundClick");
+        sound.play();
+    }
+    function soundStart() {
+        let sound = document.getElementById("soundBackGround");
+        sound.play();
+    }
+    function askMom() {
+        let sound = document.getElementById("askMom");
+        sound.play();
+        document.getElementById("askM").disabled = true;
+    }
+
+    function endLose() {
+        let sound = document.getElementById("end");
+        sound.play();
+    }
+    function winGame() {
+        let sound = document.getElementById("win");
+        sound.play();
+    }
+
+</script>
+
+
+</body>
+</html>
