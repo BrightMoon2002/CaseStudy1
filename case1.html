@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HÃY CHỌN GIÁ ĐÚNG:</title>
+    <title>AI LÀ TRIỆU PHÚ? LÀ CHÚ CHỨ AI:</title>
     <link rel="stylesheet" href="css.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -11,7 +11,8 @@
 <body>
 <div id="title1">
     <div id="h">
-        <img style="display: inline; width: 150px  " src="https://upload.wikimedia.org/wikipedia/vi/6/6c/Logo_of_Ai_la_trieu_phu_-_Ghe_nong.jpg" alt="logo" />
+        <img style="display: inline; width: 150px  "
+             src="https://upload.wikimedia.org/wikipedia/vi/6/6c/Logo_of_Ai_la_trieu_phu_-_Ghe_nong.jpg" alt="logo"/>
         <h1 style="display: inline;">WHO IS THE MILLIONAIRE</h1>
     </div>
     <div id="result">
@@ -27,7 +28,7 @@
     </div>
     <div id="ans">
         <div id="ansLeft">
-            <button class="a1" id="ans1"  onclick="clickAnswer(this.id), playSound()">1</button>
+            <button class="a1" id="ans1" onclick="clickAnswer(this.id), playSound()">1</button>
             <br>
             <button class="a2" id="ans2" onclick="clickAnswer(this.id), playSound()">2</button>
         </div>
@@ -41,11 +42,24 @@
 <button style="width: 10%" class="btn btn-success" onclick="resetQuiz(), soundStart()">Start</button>
 <button style="width: 10%" class="btn btn-danger" onclick="resetQuiz(), soundStart()">Reset</button>
 <button style="width: 10%" class="btn btn-warning" id="fifty" onclick="chooseFiftyPerFifty()">50/50</button>
-<button style="width: 10%" class="btn btn-info" id="ask"  onclick="askG()">Ask Guest</button>
-<button style="width: 10%" class="btn btn-info" id="askM"  onclick="askMom()">Call to Your Mom</button>
+<button style="width: 10%" class="btn btn-info" id="ask" onclick="askG()">Ask Guest</button>
+<button style="width: 10%" class="btn btn-info" id="askM" onclick="askMom()">Call to Your Mom</button>
+<!--//10/9/2021 cập nhật leaderBoard:-->
+<div id="leaderboard">
+    <p>Leader Board:</p>
+</div>
+<div id="displayLeaderBoard">
+    <p id="leaderBoard1"></p>
+    <p id="leaderBoard2"></p>
+    <p id="leaderBoard3"></p>
+    <p id="leaderBoard4"></p>
+    <p id="leaderBoard5"></p>
+</div>
+
 
 <audio id="soundBackGround">
-    <source autoplay="false" src="/mp3/AiLaTrieuPhu-VA_43vp2.mp3"></audio>
+    <source autoplay="false" src="/mp3/AiLaTrieuPhu-VA_43vp2.mp3">
+</audio>
 <audio id="soundClick">
     <source autoplay="false" src="mp3/Alley 119 Tho Quan 3.m4a">
 </audio>
@@ -74,7 +88,6 @@
     }
 
 
-
     function clickAnswer(id) {
         let answer = document.getElementById(id).innerText;
         gameManager.chooseAnswer(answer);
@@ -91,6 +104,8 @@
     function resetQuiz() {
         gameManager.startGame();
         displayQuiz(gameManager.current);
+        let username = prompt("Enter your name")
+        localStorage.setItem(gameManager.leaderboard, username);
     }
 
     function askG(index) {
@@ -98,15 +113,18 @@
         gameManager.askGuest(index)
         document.getElementById("ask").disabled = true;
     }
-//Sound
+
+    //Sound
     function playSound() {
         let sound = document.getElementById("soundClick");
         sound.play();
     }
+
     function soundStart() {
         let sound = document.getElementById("soundBackGround");
         sound.play();
     }
+
     function askMom() {
         let sound = document.getElementById("askMom");
         sound.play();
@@ -117,10 +135,14 @@
         let sound = document.getElementById("end");
         sound.play();
     }
+
     function winGame() {
         let sound = document.getElementById("win");
         sound.play();
     }
+    //Bộ nhớ:
+
+
 
 </script>
 

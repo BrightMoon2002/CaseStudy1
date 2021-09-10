@@ -6,6 +6,7 @@ class GameManager {
         this.current = 0;
         this.score = 0;
         this.quiznew = []
+        this.leaderboard = 1;
     }
 
     getLimit() {
@@ -33,6 +34,11 @@ class GameManager {
         return this.score;
     }
 
+    getLeaderBoard() {
+        return this.leaderboard;
+    }
+
+    setLeaderBoard() {}
     startGame() {
         this.quiznew = []
         for (let i = 0; i < 15; i++) {
@@ -65,29 +71,37 @@ class GameManager {
             this.score++;
             this.count++
             if (this.score === 15) {
+                this.endQuiz()
                 document.getElementById("prize").innerHTML = "You are the winner, your prize is: " + (2000000 * this.getScore()) + " USD";
                 winGame();
+                this.leaderboard++
             } else {
                 document.getElementById("prize").innerHTML = "Your Prize is: " + (2000000 * this.getScore()) + " USD";
             }
         } else if (this.score < 5) {
             this.count = 0;
             this.score = 0;
+            this.endQuiz()
             document.getElementById("prize").innerHTML = "Your lose";
             endLose();
-            alert("You are wrong")
+            alert("You are wrong");
+            this.leaderboard++
         } else if (this.score < 10) {
+            this.endQuiz()
             document.getElementById("prize").innerHTML = "You are winner, Your prize is: " + (5 * 200000) + " USD";
             this.score = 0;
             this.count = 0;
             endLose();
             alert("You are wrong");
+            this.leaderboard++
         } else if (this.score < 15) {
+            this.endQuiz()
             document.getElementById("prize").innerHTML = "You are winner, Your prize is: " + (10 * 200000) + " USD";
             this.score = 0;
             this.count = 0;
             endLose();
             alert("You are wrong");
+            this.leaderboard++
         }
     }
 
@@ -105,6 +119,20 @@ class GameManager {
         this.quiznew.splice(index, 1);
     }
 
+    endQuiz() {
+        if (this.leaderboard % 5 === 0) {
+            document.getElementById("leaderBoard1").innerText = localStorage.getItem(this.leaderboard) + (this.getScore()*200000);
+        } else if (this.leaderboard % 5 ===1) {
+            document.getElementById("leaderBoard2").innerText = localStorage.getItem(this.leaderboard) + (this.getScore()*200000);
+        } else if (this.leaderboard % 5 ===2) {
+            document.getElementById("leaderBoard3").innerText = localStorage.getItem(this.leaderboard) + (this.getScore()*200000);
+        } else if (this.leaderboard % 5 ===3) {
+            document.getElementById("leaderBoard4").innerText = localStorage.getItem(this.leaderboard) + (this.getScore()*200000);
+        } else {
+            document.getElementById("leaderBoard5").innerText = localStorage.getItem(this.leaderboard) + (this.getScore()*200000);
+        }
+
+    }
 
     chooseFifty(index) {
         let count1 = 0;

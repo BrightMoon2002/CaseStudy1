@@ -39,6 +39,7 @@ div#ans {
     margin-top: 10px;
 
 }
+
 div#ansRight {
     width: 27%;
     height: 100px;
@@ -90,5 +91,40 @@ button#ans4 {
     margin-right: 150px;
     background-color: #0342f400;
     border: none;
+    color: burlywood;
+}
+
+div#leaderboard {
+    color: crimson;
+    margin: auto;
+    text-align: center;
+}
+
+div#displayLeaderBoard {
+    margin: auto;
+}
+
+p#leaderBoard1 {
+    text-align: center;
+    color: burlywood;
+}
+
+p#leaderBoard2 {
+    text-align: center;
+    color: burlywood;
+}
+
+p#leaderBoard3 {
+    text-align: center;
+    color: burlywood;
+}
+
+p#leaderBoard4 {
+    text-align: center;
+    color: burlywood;
+}
+
+p#leaderBoard5 {
+    text-align: center;
     color: burlywood;
 }
